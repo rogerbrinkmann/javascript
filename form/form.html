@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Form</title>
+    <style>
+        body {
+            font-size: 15px;
+            color: #222222;
+            font-family: monospace;
+        }
+
+        .content {
+            margin: 0% 25% 0% 25%;
+        }
+
+        h1 {
+            margin-left: 15px;
+        }
+
+        input[type="checkbox"] {
+            block-size: 15px;
+            width: 15px;
+            height: 15px;
+        }
+
+        input[type="radio"] {
+            block-size: 15px;
+            width: 15px;
+            height: 15px;
+        }
+
+        input[type="button"] {
+            block-size: 15px;
+            height: 25px;
+            font-size: 15px;
+            background-color: "#eeeeee";
+            border-radius: 2px;
+            border: #cccccc solid 1px;
+        }
+
+        .txt1container {
+            font-size: inherit;
+            display: none;
+            padding: 5px;
+        }
+
+        input[type="text"] {
+            font-size: inherit;
+            width: 100%;
+        }
+
+        .result {
+            font-size: inherit;
+            resize: vertical;
+            height: 250px;
+            width: 100%;
+            border-color: #cccccc;
+            margin-bottom: 3px;
+        }
+
+        label {
+            vertical-align: 20%;
+        }
+
+        .border {
+            border-radius: 5px;
+            border: solid #cccccc 1px;
+            padding: 15px;
+            margin: 15px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="content">
+        <h1>Heading</h1>
+        <div class="border">
+            Some Text
+        </div>
+        <div class="border">
+            <input id="cb1" type="checkbox" name="check1" value="check1" onchange="check1EventHandler(event, 0);">
+            <label for="cb1">Text</label>
+        </div>
+        <div class="border">
+            <input id="cb2" type="checkbox" name="check2" value="check2" onchange="check2EventHandler(event, 1);">
+            <label for="cb2">Text</label>
+        </div>
+
+        <div class="border">
+            <div>
+                <input id="r1" type="radio" name="radio1" value="choice1" onchange="radio1EventHandler(event, 2)">
+                <label for="r1">Choice 1</label>
+            </div>
+            <div>
+                <input id="r2" type="radio" name="radio1" value="choice2" onchange="radio1EventHandler(event, 2)">
+                <label for="r2">Choice 2</label>
+            </div>
+            <div>
+                <input id="r3" type="radio" name="radio1" value="choice3" onchange="radio1EventHandler(event, 2)">
+                <label for="r3">Choice 3</label>
+            </div>
+            <div id="txt1container" class="txt1container">
+                Please enter a reason:<br>
+                <input type="text" id="txt1" class="txt1" name="txt1" value="" onkeyup="text1EventHandler(event, 3)">
+            </div>
+        </div>
+        <div class="border">
+            <textarea id="result" class="result"></textarea>
+            <input type="button" value="Copy content to clipboard" onclick="copy2clip()"><br>
+        </div>
+    </div>
+
+    <script>
+        var data = [];
+        var output = {
+            "check1": "Selected1",
+            "check2": "Selected2",
+            "choice1": "Choice1",
+            "choice2": "Choice2",
+            "choice3": "Choice3",
+        }
+        var resultContent = document.getElementById("result");
+
+        function check1EventHandler(event, num) {
+            if (event.target.checked) {
+                data[num] = output["check1"];
+            }
+            else {
+                data[num] = "";
+            }
+            update();
+        }
+
+        function check2EventHandler(event, num) {
+            if (event.target.checked) {
+                data[num] = output["check2"];
+            }
+            else {
+                data[num] = "";
+            }
+            update();
+        }
+
+        function radio1EventHandler(event, num) {
+            var textContainerElement = document.getElementById("txt1container");
+            var textInputElement = document.getElementById("txt1");
+            if (event.target.value == "choice3") {
+                textContainerElement.style["display"] = "block";
+                data[num + 1] = textInputElement.value;
+            }
+            else {
+                textContainerElement.style["display"] = "none";
+                data[num + 1] = "";
+            }
+            data[num] = output[event.target.value];
+            update();
+        }
+
+        function text1EventHandler(event, num) {
+            data[num] = event.target.value;
+            update();
+        }
+
+        function update() {
+            resultContent.value = "";
+            for (var d in data) {
+                resultContent.value += data[d];
+                if (data[d].length > 0) {
+                    resultContent.value += "\n";
+                }
+            }
+        }
+
+        function copy2clip() {
+            resultContent.select();
+            resultContent.setSelectionRange(0, 99999)
+            document.execCommand("copy");
+        }
+    </script>
+</body>
+
+</html>

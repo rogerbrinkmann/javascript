@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Load from json-file</title>
+</head>
+
+<body>
+    <input type='file' accept=".json" onchange='openFile(event)'>
+    <script>
+        var openFile = function (event) {
+            var input = event.target;
+            var reader = new FileReader();
+            reader.onload = function () {
+                var text = reader.result;
+                console.log(reader.result.substring(0, 200));
+            };
+            reader.readAsText(input.files[0]);
+        };
+
+        var reader = new FileReader();
+        reader.onload = function () {
+            var text = reader.result;
+            console.log(reader.result.substring(0, 200));
+        }
+        f = new File(['abc'], "data.json")
+        reader.readAsText(f);
+    </script>
+
+</body>
+
+</html>
