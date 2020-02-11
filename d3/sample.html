@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Example</title>
+    <style>
+        body {
+            margin: 0;
+        }
+
+        svg {
+            background-color: red;
+        }
+
+        #container {
+            position: fixed;
+            left: 0px;
+            right: 0px;
+            top: 0px;
+            bottom: 0px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="container">
+        <svg id="chart"></svg>
+    </div>
+
+    <script>
+        window.onresize = () => {
+            var container = document.getElementById("container");
+            var chart = document.getElementById("chart");
+            chart.setAttribute("width", container.clientWidth)
+            chart.setAttribute("height", container.clientHeight);
+        }
+    </script>
+</body>
+
+</html>
