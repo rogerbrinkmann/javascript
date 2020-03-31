@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+</head>
+
+<body>
+
+    <script>
+        let data;
+        fetch('https://thevirustracker.com/free-api?countryTimeline=DE')
+            .then((response) => {
+                return response.json();
+            })
+            .then((json_data) => {
+                data = json_data;
+            })
+    </script>
+</body>
+
+</html>

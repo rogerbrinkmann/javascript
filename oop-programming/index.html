@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+</head>
+
+<body>
+    <div id="form"></div>
+
+    <script>
+
+        function FormField(text, id) {
+            this.text = text;
+            this.container = document.createElement("div");
+            this.container.id = id;
+            this.__append_field = function () {
+                const description_area = document.createElement("p");
+                description_area.innerText = this.text;
+                this.container.append(description_area);
+                document.getElementById("form").append(this.container);
+            }
+        }
+
+        function TextInput(...args) {
+            FormField.apply(this, args);
+            this.input = document.createElement("input");
+            this.input.type = "text";
+            this.add = function () {
+                this.__append_field()
+                this.container.append(this.input);
+            }
+        }
+
+        function CheckBox(...args) {
+            FormField.apply(this, args);
+            this.input = document.createElement("input");
+            this.input.type = "checkbox";
+            this.add = function () {
+                this.__append_field()
+                this.container.append(this.input);
+            }
+        }
+
+
+        TextInput.prototype = Object.create(FormField.prototype);
+
+        var ti1 = new TextInput("Field1", "field1");
+        var cb1 = new CheckBox("Checkbox1", "checkbox1");
+
+        ti1.add();
+        cb1.add();
+
+    </script>
+</body>
+
+</html>
