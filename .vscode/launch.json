@@ -9,8 +9,8 @@
             "request": "launch",
             "name": "Launch Chrome against localhost",
             "url": "http://localhost:5500",
-            "webRoot": "${workspaceFolder}/canvas",
-            "file": "${workspaceFolder}/canvas/index.html"
+            "webRoot": "${workspaceFolder}/pixi",
+            "file": "${workspaceFolder}/pixi/index.html"
         }
     ]
 }
